@@ -57,7 +57,7 @@ resource "azurerm_network_interface" "network_interface_spoke_eus" {
   }
 }
 
-resource "random_id" "randomId_eus" {
+resource "random_id" "random_id_eus" {
   keepers = {
     resource_group = azurerm_resource_group.resource_group_eus.name
   }
@@ -65,7 +65,7 @@ resource "random_id" "randomId_eus" {
 }
 
 resource "azurerm_storage_account" "storage_account_spoke_eus" {
-  name                     = "eusdiag${random_id.randomId_eus.hex}"
+  name                     = "eusdiag${random_id.random_id_eus.hex}"
   resource_group_name      = azurerm_resource_group.resource_group_eus.name
   location                 = azurerm_resource_group.resource_group_eus.location
   account_tier             = "Standard"

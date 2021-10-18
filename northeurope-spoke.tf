@@ -57,7 +57,7 @@ resource "azurerm_network_interface" "network_interface_spoke_neu" {
   }
 }
 
-resource "random_id" "randomId_neu" {
+resource "random_id" "random_id_neu" {
   keepers = {
     resource_group = azurerm_resource_group.resource_group_neu.name
   }
@@ -65,7 +65,7 @@ resource "random_id" "randomId_neu" {
 }
 
 resource "azurerm_storage_account" "storage_account_spoke_neu" {
-  name                     = "neudiag${random_id.randomId_neu.hex}"
+  name                     = "neudiag${random_id.random_id_neu.hex}"
   resource_group_name      = azurerm_resource_group.resource_group_neu.name
   location                 = azurerm_resource_group.resource_group_neu.location
   account_tier             = "Standard"
