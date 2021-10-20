@@ -96,7 +96,7 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine_spoke_eus" {
 
   admin_username                  = "azureuser"
   disable_password_authentication = false
-  admin_password = random_password.password.result
+  admin_password                  = random_password.password.result
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.storage_account_spoke_eus.primary_blob_endpoint

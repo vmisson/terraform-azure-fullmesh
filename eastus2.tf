@@ -124,6 +124,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_eus-to-weu" {
   enable_bgp                 = true
   virtual_network_gateway_id = azurerm_virtual_network_gateway.gateway_eus.id
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_weu.id
+  dpd_timeout_seconds        = 15
 
   shared_key = "tFYr4y3BNger8EUE"
 }
@@ -137,6 +138,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_eus-to-weu_sec
   enable_bgp                 = true
   virtual_network_gateway_id = azurerm_virtual_network_gateway.gateway_eus.id
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_weu_seconday.id
+  dpd_timeout_seconds        = 15
 
   shared_key = "tFYr4y3BNger8EUE"
 }
@@ -150,6 +152,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_eus-to-neu" {
   enable_bgp                 = true
   virtual_network_gateway_id = azurerm_virtual_network_gateway.gateway_eus.id
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_neu.id
+  dpd_timeout_seconds        = 15
 
   shared_key = "tFYr4y3BNger8EUE"
 }
@@ -163,6 +166,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_eus-to-neu_sec
   enable_bgp                 = true
   virtual_network_gateway_id = azurerm_virtual_network_gateway.gateway_eus.id
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_neu_seconday.id
+  dpd_timeout_seconds        = 15
 
   shared_key = "tFYr4y3BNger8EUE"
 }
