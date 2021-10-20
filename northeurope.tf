@@ -6,7 +6,7 @@
 #
 #################################################################################
 resource "azurerm_resource_group" "resource_group_neu" {
-  name     = "DC-EUS"
+  name     = "DC-NEU"
   location = "North Europe"
 }
 
