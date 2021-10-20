@@ -29,7 +29,7 @@ resource "azurerm_virtual_network_peering" "virtual_network_peering_weu" {
 
 resource "azurerm_virtual_network_peering" "virtual_network_peering_weu_spoke" {
   depends_on = [
-    azurerm_virtual_network_peering.virtual_network_peering_weu, 
+    azurerm_virtual_network_peering.virtual_network_peering_weu,
     azurerm_virtual_network_gateway.gateway_weu
   ]
   name                      = "spoke-to-weu"
@@ -37,7 +37,7 @@ resource "azurerm_virtual_network_peering" "virtual_network_peering_weu_spoke" {
   virtual_network_name      = azurerm_virtual_network.virtual_network_weu_spoke.name
   remote_virtual_network_id = azurerm_virtual_network.virtual_network_weu.id
   allow_forwarded_traffic   = true
-  use_remote_gateways       = true  
+  use_remote_gateways       = true
 }
 
 #################################################################################
@@ -96,7 +96,7 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine_spoke_weu" {
 
   admin_username                  = "azureuser"
   disable_password_authentication = false
-  admin_password = random_password.password.result
+  admin_password                  = random_password.password.result
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.storage_account_spoke_weu.primary_blob_endpoint
