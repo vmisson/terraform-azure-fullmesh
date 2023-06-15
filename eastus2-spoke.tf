@@ -57,29 +57,13 @@ resource "azurerm_network_interface" "network_interface_spoke_eus" {
   }
 }
 
-resource "random_id" "random_id_eus" {
-  keepers = {
-    resource_group = azurerm_resource_group.resource_group_eus.name
-  }
-  byte_length = 8
-}
-
-resource "azurerm_storage_account" "storage_account_spoke_eus" {
-  name                     = "eusdiag${random_id.random_id_eus.hex}"
-  resource_group_name      = azurerm_resource_group.resource_group_eus.name
-  location                 = azurerm_resource_group.resource_group_eus.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  min_tls_version          = "TLS1_2"
-}
-
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "linux_virtual_machine_spoke_eus" {
   name                  = "eusvm001"
   location              = azurerm_resource_group.resource_group_eus.location
   resource_group_name   = azurerm_resource_group.resource_group_eus.name
   network_interface_ids = [azurerm_network_interface.network_interface_spoke_eus.id]
-  size                  = "Standard_DS1_v2"
+  size                  = "Standard_B1ms"
 
   os_disk {
     name                 = "eusvm001-os"
@@ -88,17 +72,13 @@ resource "azurerm_linux_virtual_machine" "linux_virtual_machine_spoke_eus" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    publisher = "canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
 
   admin_username                  = "azureuser"
   disable_password_authentication = false
   admin_password                  = random_password.password.result
-
-  boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.storage_account_spoke_eus.primary_blob_endpoint
-  }
 }

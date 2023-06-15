@@ -9,6 +9,9 @@
 # terraform lock
 .terraform.lock.hcl
 
+# infracost files
+**/.infracost/*
+
 # Crash log files
 crash.log
 

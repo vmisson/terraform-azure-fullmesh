@@ -35,6 +35,7 @@ resource "azurerm_public_ip" "gateway_weu_pip" {
   resource_group_name = azurerm_resource_group.resource_group_weu.name
   sku                 = "Standard"
   allocation_method   = "Static"
+  zones = [ "1", "2", "3" ]
 }
 
 resource "azurerm_public_ip" "gateway_weu_secondary_pip" {
@@ -43,6 +44,7 @@ resource "azurerm_public_ip" "gateway_weu_secondary_pip" {
   resource_group_name = azurerm_resource_group.resource_group_weu.name
   sku                 = "Standard"
   allocation_method   = "Static"
+  zones = [ "1", "2", "3" ]
 }
 
 resource "azurerm_virtual_network_gateway" "gateway_weu" {
@@ -126,7 +128,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-neu" {
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_neu.id
   dpd_timeout_seconds        = 15
 
-  shared_key = "tFYr4y3BNger8EUE"
+  shared_key = random_password.psk.result
 }
 
 resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-neu_seconday" {
@@ -140,7 +142,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-neu_sec
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_neu_seconday.id
   dpd_timeout_seconds        = 15
 
-  shared_key = "tFYr4y3BNger8EUE"
+  shared_key = random_password.psk.result
 }
 
 resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-eus" {
@@ -154,7 +156,7 @@ resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-eus" {
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_eus.id
   dpd_timeout_seconds        = 15
 
-  shared_key = "tFYr4y3BNger8EUE"
+  shared_key = random_password.psk.result
 }
 
 resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-eus_seconday" {
@@ -168,5 +170,5 @@ resource "azurerm_virtual_network_gateway_connection" "connection_weu-to-eus_sec
   local_network_gateway_id   = azurerm_local_network_gateway.local_network_gateway_eus_seconday.id
   dpd_timeout_seconds        = 15
 
-  shared_key = "tFYr4y3BNger8EUE"
+  shared_key = random_password.psk.result
 }
